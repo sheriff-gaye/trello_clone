@@ -1,13 +1,11 @@
-import { OrganizationSwitcher } from '@clerk/nextjs'
-import React from 'react'
+"use client"
 
-const page = () => {
+const OrganizationIdPage =  () => {
   return (
-    <div>
-
-        <OrganizationSwitcher  hidePersonal/>
+    <div className="w-full mb-20">
+       Organization page
     </div>
   )
 }
 
-export default page
+export default OrganizationIdPage

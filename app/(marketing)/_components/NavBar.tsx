@@ -1,6 +1,6 @@
-import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Logo } from '../../../components/logo';
 
 const NavBar = () => {
   return (
