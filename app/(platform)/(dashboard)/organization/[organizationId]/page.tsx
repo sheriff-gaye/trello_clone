@@ -2,11 +2,14 @@
 import { create } from "@/actions/create-board";
 import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
+import { Board } from "./board";
+import { deleteBoard } from "@/actions/delete-board";
 
 const OrganizationIdPage =  async() => {
 
   const boards=await db.board.findMany();
 
+  
 
   return (
     <div>
@@ -24,11 +27,13 @@ const OrganizationIdPage =  async() => {
         <Button type="submit" className="ml-2">Submit</Button>
       </form>
 
-      <ul>
-        {boards.map((board) => (
-          <li key={board.id}>{board.title}</li>
-        ))}
-        </ul>
+      <div className="space-y-2">
+        {
+          boards.map((board)=>(
+            <Board key={board.id} id={board.id!} title={board.title!} />
+          ))
+        }
+      </div>
     </div>
   );
 };
