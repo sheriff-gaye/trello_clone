@@ -7,6 +7,7 @@ import { AccordionContent } from "@radix-ui/react-accordion";
 import { Activity, CreditCard, Layout, Settings } from "lucide-react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export type Organization = {
   id: string;
@@ -79,18 +80,34 @@ const NavItem = ({
         </div>
       </AccordionTrigger>
       <AccordionContent className="p-1 text-neutral-700">
-        {
-          routes.map((route)=>(
-            <Button key={route.href} size="sm" onClick={()=>onClick(route.href)} className={cn(`w-full font-normal justify-start pl-10 mb-1 `, pathname==route.href  && "bg-sky-500/10  text-sky-500")}  variant="ghost">
-              {route.icon}
-              {route.label}
-
-            </Button>
-          ))
-        }
-
+        {routes.map((route) => (
+          <Button
+            key={route.href}
+            size="sm"
+            onClick={() => onClick(route.href)}
+            className={cn(
+              `w-full font-normal justify-start pl-10 mb-1 `,
+              pathname == route.href && "bg-sky-500/10  text-sky-500"
+            )}
+            variant="ghost"
+          >
+            {route.icon}
+            {route.label}
+          </Button>
+        ))}
       </AccordionContent>
     </AccordionItem>
+  );
+};
+
+NavItem.Skeleton = function SkeletonNavItem() {
+  return (
+    <div className="flex items-center gap-x-2">
+      <div className="w-10 h-10 relative shrink-0">
+        <Skeleton className="h-full w-full absolute" />
+      </div>
+      <Skeleton className="h-10  w-full" />
+    </div>
   );
 };
 
