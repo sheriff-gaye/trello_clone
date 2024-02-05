@@ -1,29 +1,24 @@
+"use client"
 
 import { create } from "@/actions/create-board";
 import { Button } from "@/components/ui/button";
-import { db } from "@/lib/db";
-import { Board } from "./board";
-import { deleteBoard } from "@/actions/delete-board";
+import FormInput from "./form-input";
+import { useFormState } from "react-dom";
 
 const OrganizationIdPage =  async() => {
 
   const boards=await db.board.findMany();
 
+  const initialState={message:null,errors:{}};
+  const [state,dispatch]=useFormState(create,initialState)
   
 
   return (
     <div>
-      <form
-        action={create}
-      >
-        <input
-          type="text"
-          id="title"
-          required
-          name="title"
-          placeholder="Enter a Board Title"
-          className=" border-black border p-2"
-        />
+      <form action={dispatch}>
+
+        <FormInput errors={state.errors}/>
+     
         <Button type="submit" className="ml-2">Submit</Button>
       </form>
 

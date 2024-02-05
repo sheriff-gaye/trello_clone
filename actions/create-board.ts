@@ -4,12 +4,19 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
-const createBoard = z.object({
-    title: z.string()
 
+export type State={
+    errors?:{
+        title ?:string[];
+    },
+    message?:string | null; 
+}
+
+const createBoard = z.object({
+    title: z.string().min(3, {message:"Minimum length of 3 characters"})
 })
 
-export async function create(formData: FormData) {
+export async function create(prevState:State, formData: FormData) {
 
     const { title } = createBoard.parse({
         title: formData.get("title")
