@@ -6,6 +6,7 @@ import { Draggable, Droppable } from "@hello-pangea/dnd";
 import { ElementRef, useRef, useState } from "react";
 import { ListHeader } from "./list-header";
 import { CardItem } from "./cart-item";
+import { CardForm } from "./card-form";
 
 interface ListItemProps {
   data: ListWithCard;
@@ -62,7 +63,8 @@ export const ListItem = ({ data, index }: ListItemProps) => {
               listId={data.id}
               ref={textareaRef}
               isEditing={isEditing}
-              onDisabledEditing={disabledEditing}
+              enableEditing={enabledEditing}
+              disableEditing={disabledEditing}
             />
           </div>
         </li>

@@ -90,7 +90,7 @@ export const ListHeader = ({ data, onAddCart }: ListHeaderProps) => {
           onClick={enableEditing}
         >{title}</div>
       )}
-      <ListOptions data={data}  onAddCart={onAddCart}/>
+      {/* <ListOptions data={data}  onAddCart={onAddCart}/> */}
     </div>
   );
 };
