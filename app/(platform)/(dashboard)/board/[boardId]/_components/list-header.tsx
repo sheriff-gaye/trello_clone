@@ -6,6 +6,7 @@ import { ElementRef, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useEventListener } from "usehooks-ts";
 import { updateList } from '../../../../../../actions/update-list/index';
+import { ListOptions } from "./list-options";
 
 interface ListHeaderProps {
   data: List;
@@ -90,7 +91,7 @@ export const ListHeader = ({ data, onAddCart }: ListHeaderProps) => {
           onClick={enableEditing}
         >{title}</div>
       )}
-      {/* <ListOptions data={data}  onAddCart={onAddCart}/> */}
+      <ListOptions data={data}  onAddCard={onAddCart}/>
     </div>
   );
 };
