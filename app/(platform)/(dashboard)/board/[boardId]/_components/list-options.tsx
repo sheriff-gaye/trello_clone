@@ -97,6 +97,7 @@ export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
           >
             Copy List..
           </FormSubmit>
+          </form>
 
           <Separator />
           <form action={onDelete}>
@@ -109,7 +110,7 @@ export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
             >
               Delete this list
             </FormSubmit>
-          </form>
+         
         </form>
       </PopoverContent>
     </Popover>

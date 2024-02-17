@@ -21,4 +21,5 @@ export const UpdateCard = z.object({
                 message: "Title is too short.",
             }),
     ),
+    id: z.string(),
 });
