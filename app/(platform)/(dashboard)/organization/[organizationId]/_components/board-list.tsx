@@ -6,9 +6,12 @@ import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Skeleton } from '@/components/ui/skeleton';
+import { MAX_FREE_BOARDS } from "@/constants/board";
+import { getAvailableCount } from "@/lib/org-limit";
 
 export const BoardList = async () => {
   const { orgId } = auth();
+  const availableCount = await getAvailableCount();
 
   if (!orgId) {
     return redirect("/select-org");
@@ -48,7 +51,7 @@ export const BoardList = async () => {
           >
             <p className="text-sm">Create New Board</p>
 
-            <span className="">5 remainding</span>
+            <span className="">{`${MAX_FREE_BOARDS - availableCount} remainding`}</span>
             <Hint
               sideOffset={40}
               description={`

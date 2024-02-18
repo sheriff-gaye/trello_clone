@@ -8,17 +8,26 @@ import { auth } from "@clerk/nextjs";
 import { CreateBoard } from "./schema";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { createAuditLog } from "@/lib/create-audit-logs";
+import { hasAvailableCount, incrementAvailableCount } from "@/lib/org-limit";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
 
-    const { userId,orgId } = auth();
+    const { userId, orgId } = auth();
 
     if (!userId || !orgId) {
         return {
             error: "Unauthorized",
         }
     }
-    const { title,image } = data
+
+    const canCreate = await hasAvailableCount();
+
+    if (!canCreate) {
+        return {
+            error: "You have reach your Limit of free boards .Please Upgrade to the Pro Plan to Create More"
+        }
+    }
+    const { title, image } = data
 
     const [
         imageId,
@@ -26,19 +35,19 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         imageFullUrl,
         imageLinkHTML,
         imageUserName
-      ] = image.split("|");
+    ] = image.split("|");
 
-      console.log( imageId,
+    console.log(imageId,
         imageThumbUrl,
         imageFullUrl,
         imageLinkHTML,
         imageUserName)
-    
-      if (!imageId || !imageThumbUrl || !imageFullUrl || !imageUserName || !imageLinkHTML) {
+
+    if (!imageId || !imageThumbUrl || !imageFullUrl || !imageUserName || !imageLinkHTML) {
         return {
-          error: "Missing fields. Failed to create board."
+            error: "Missing fields. Failed to create board."
         };
-      }
+    }
     let board;
 
     try {
@@ -53,6 +62,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
                 imageLinkHTML,
             }
         });
+
+        await incrementAvailableCount();
 
         await createAuditLog({
             entityTitle: board.title,
@@ -69,7 +80,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     }
     revalidatePath(`/board/${board.id}`);
 
-    return{data:board}
+    return { data: board }
 
 }
 
