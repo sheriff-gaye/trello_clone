@@ -9,6 +9,7 @@ import { CreateBoard } from "./schema";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { createAuditLog } from "@/lib/create-audit-logs";
 import { hasAvailableCount, incrementAvailableCount } from "@/lib/org-limit";
+import { checkSubscription } from "@/lib/subscription";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
 
@@ -19,10 +20,10 @@ const handler = async (data: InputType): Promise<ReturnType> => {
             error: "Unauthorized",
         }
     }
-
+    const isPro = await checkSubscription();
     const canCreate = await hasAvailableCount();
 
-    if (!canCreate) {
+    if (!canCreate || !isPro) {
         return {
             error: "You have reach your Limit of free boards .Please Upgrade to the Pro Plan to Create More"
         }
@@ -63,7 +64,9 @@ const handler = async (data: InputType): Promise<ReturnType> => {
             }
         });
 
+       if(!isPro){
         await incrementAvailableCount();
+       }
 
         await createAuditLog({
             entityTitle: board.title,
