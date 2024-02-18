@@ -22,7 +22,7 @@ export const CardItem = ({ data, index }: CardItemProps) => {
           onClick={()=>cardModal.onOpen(data.id)}
           className="turncate border-2  border-transparent hover:border-black py-2 px-3  text-sm  bg-white rounded-sm shadow-sm"
         >
-          {data.title}6
+          {data.title}
         </div>
       )}
     </Draggable>

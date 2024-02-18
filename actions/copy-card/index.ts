@@ -1,5 +1,4 @@
-"use server";
-
+"use server"
 import { auth } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
 import { ACTION, ENTITY_TYPE } from "@prisma/client";
