@@ -23,11 +23,14 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     const isPro = await checkSubscription();
     const canCreate = await hasAvailableCount();
 
-    if (!canCreate || !isPro) {
+    
+    if (!canCreate && !isPro) {
         return {
-            error: "You have reach your Limit of free boards .Please Upgrade to the Pro Plan to Create More"
+          error: "You have reached your limit of free boards. Please upgrade to create more."
         }
-    }
+      }
+
+      
     const { title, image } = data
 
     const [
