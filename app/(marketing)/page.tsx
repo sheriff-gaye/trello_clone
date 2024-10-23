@@ -34,9 +34,9 @@ const MarketingPage = () => {
           <Medal className="h-6 w-6 mr-2 " />
           No 1 Project Management
         </div>
-        <h1 className=" md:text 6xl text-[50px] leading-8 text-center  text-neutral-800 mb-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl  space-y-5 font-extrabold">
+        <h1 className=" text-[50px] leading-8 text-center  text-neutral-800 mb-6 text-2xl sm:text-3xl md:text-6xl lg:text-7xl  space-y-5 font-extrabold">
            <span className="text-sky-700">Efficiently Manage </span>your teams <br />
-           Projects with Chrono Task
+           Projects with Draff
         </h1>
         {/* <div className="text-3xl md:text-6xl bg-gradient-to-r from-fuchsia-600 to-pink-600 text-white px-4 p-2 rounded-md pb-4 w-fit">
           work forward
@@ -45,7 +45,7 @@ const MarketingPage = () => {
       <div className={cn("text-sm  md:text-xl  mt-4 max-w-xs md:max-w-2xl text-center mx-auto", textFont.className)}>
         Collaborate , manage projects and reach new productivity peaks from high
         rise to the home office , the way your team works is unique - accomplsh
-        it all with Chrono Task
+        it all with Draff
       </div>
       <div className="flex gap-3">
       <Button className="mt-6" size="lg" asChild variant="primary">
